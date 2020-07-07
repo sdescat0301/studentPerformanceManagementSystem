@@ -8,12 +8,12 @@
 //定义学生结构体
  typedef struct studenttype
 {
-	int num = 0;//学生编号
-	int ch = 0;//语文成绩
-	int ma = 0;	//数学成绩
-	int eng = 0;//英语成绩
-	int sum = 0;//总成绩
-	float ave = (float)sum / 3;	//该生三科平均分
+	int num = 0;	//学生编号
+	int ch = 0;	  //语文成绩
+	int ma = 0;	  //数学成绩
+	int eng = 0;    //英语成绩
+	int sum = 0;    //总成绩
+	float ave = (float)sum / 3;	    //该生三科平均分
 }student;
 
 //声明要使用的函数函数
@@ -38,25 +38,26 @@ int main()
 	}
 
 	//读入学生成绩
-	int i = 0;
+	int stunum = 0;		//学生总数
 	student stu[100];
 	while(!feof(fp))
 	{
-		fscanf_s(fp, "%d%d%d%d", &stu[i].num, &stu[i].ch, &stu[i].ma, &stu[i].eng);
-		stu[i].sum = (stu[i].ch + stu[i].ma + stu[i].eng);//计算个人总分
-		stu[i].ave = (float)stu[i].sum / 3;//计算个人平均分
-		i++;
+		fscanf_s(fp, "%d%d%d%d", &stu[i].num, &stu[i].ch, &stu[i].ma, &stu[i].eng);		//从文件中读取学号、成绩
+		stu[i].sum = (stu[i].ch + stu[i].ma + stu[i].eng);		//计算个人总分
+		stu[i].ave = (float)stu[i].sum / 3;		//计算个人平均分
+		stunum ++;
 	}
-	int stunum = i;
 
 	//计算班级平均分、及格和不及格、成绩在平均分之上的人数
 	float classave=0;
 	int pass = 0, failnum = 0, aboveave = 0;
+
 	for (int i = 0; i < stunum; i++)
 	{
 		classave += stu[i].ave;
 	}
-	classave = classave / stunum;
+	classave = classave / stunum;	//计算班级平均分
+
 	for (int i = 0; i < stunum; i++)
 	{
 		if (stu[i].sum < 180)
@@ -67,7 +68,7 @@ int main()
 		{
 			aboveave++;
 		}
-	}
+	}	//计算不及格总人数和超过平均分的总人数
 
 reStart://再次使用系统的入口
 
