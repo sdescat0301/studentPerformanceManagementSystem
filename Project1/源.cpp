@@ -1,22 +1,22 @@
-/*****************Ñ§Éú³É¼¨¹ÜÀíÏµÍ³v1.1.10*****************
-******************×¢Òâ£ºÏµÍ³ÈËÊıÉÏÏŞÎª100*****************
-****²âÊÔÊı¾İ¸ñÊ½Îª¡°Ñ§Éú±àºÅ ÓïÎÄ³É¼¨ ÊıÑ§³É¼¨ Ó¢Óï³É¼¨\n¡±****/
+/*****************å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿv1.1.10*****************
+******************æ³¨æ„ï¼šç³»ç»Ÿäººæ•°ä¸Šé™ä¸º100*****************
+****æµ‹è¯•æ•°æ®æ ¼å¼ä¸ºâ€œå­¦ç”Ÿç¼–å· è¯­æ–‡æˆç»© æ•°å­¦æˆç»© è‹±è¯­æˆç»©\nâ€****/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 
-//¶¨ÒåÑ§Éú½á¹¹Ìå
+//å®šä¹‰å­¦ç”Ÿç»“æ„ä½“
  typedef struct studenttype
 {
-	int num = 0;	//Ñ§Éú±àºÅ
-	int ch = 0;	  //ÓïÎÄ³É¼¨
-	int ma = 0;	  //ÊıÑ§³É¼¨
-	int eng = 0;    //Ó¢Óï³É¼¨
-	int sum = 0;    //×Ü³É¼¨
-	float ave = (float)sum / 3;	    //¸ÃÉúÈı¿ÆÆ½¾ù·Ö
+	int num = 0;	//å­¦ç”Ÿç¼–å·
+	int ch = 0;	  //è¯­æ–‡æˆç»©
+	int ma = 0;	  //æ•°å­¦æˆç»©
+	int eng = 0;    //è‹±è¯­æˆç»©
+	int sum = 0;    //æ€»æˆç»©
+	float ave = (float)sum / 3;	    //è¯¥ç”Ÿä¸‰ç§‘å¹³å‡åˆ†
 }student;
 
-//ÉùÃ÷ÒªÊ¹ÓÃµÄº¯Êıº¯Êı
+//å£°æ˜è¦ä½¿ç”¨çš„å‡½æ•°å‡½æ•°
 void fun1(student stu[100], int stunum, int failnum);
 void fun2(student stu[100], int stunum, int aboveave, float classave);
 void fun3(student stu[100], int n);
@@ -24,31 +24,31 @@ void fun4(student stu[100], int n);
 void fun5(student stu[100], int n, FILE *fp);
 void fun6(student stu[100], int n);
 
-//Ö÷º¯Êı
+//ä¸»å‡½æ•°
 int main()
 {
-	//´ò¿ª´¢´æ³É¼¨ĞÅÏ¢µÄÎÄ¼ş
+	//æ‰“å¼€å‚¨å­˜æˆç»©ä¿¡æ¯çš„æ–‡ä»¶
 	FILE* fp = NULL;
 	errno_t err;
-	err = fopen_s(&fp,"/*TestDataÄ¿Â¼*/","a+");
+	err = fopen_s(&fp,"/*TestDataç›®å½•*/","a+");
 	if (fp == NULL)
 	{
 		printf("No data");
 		return -1;
 	}
 
-	//¶ÁÈëÑ§Éú³É¼¨
-	int stunum = 0;		//Ñ§Éú×ÜÊı
+	//è¯»å…¥å­¦ç”Ÿæˆç»©
+	int stunum = 0;		//å­¦ç”Ÿæ€»æ•°
 	student stu[100];
 	while(!feof(fp))
 	{
-		fscanf_s(fp, "%d%d%d%d", &stu[i].num, &stu[i].ch, &stu[i].ma, &stu[i].eng);		//´ÓÎÄ¼şÖĞ¶ÁÈ¡Ñ§ºÅ¡¢³É¼¨
-		stu[i].sum = (stu[i].ch + stu[i].ma + stu[i].eng);		//¼ÆËã¸öÈË×Ü·Ö
-		stu[i].ave = (float)stu[i].sum / 3;		//¼ÆËã¸öÈËÆ½¾ù·Ö
+		fscanf_s(fp, "%d%d%d%d", &stu[i].num, &stu[i].ch, &stu[i].ma, &stu[i].eng);		//ä»æ–‡ä»¶ä¸­è¯»å–å­¦å·ã€æˆç»©
+		stu[i].sum = (stu[i].ch + stu[i].ma + stu[i].eng);		//è®¡ç®—ä¸ªäººæ€»åˆ†
+		stu[i].ave = (float)stu[i].sum / 3;		//è®¡ç®—ä¸ªäººå¹³å‡åˆ†
 		stunum ++;
 	}
 
-	//¼ÆËã°à¼¶Æ½¾ù·Ö¡¢¼°¸ñºÍ²»¼°¸ñ¡¢³É¼¨ÔÚÆ½¾ù·ÖÖ®ÉÏµÄÈËÊı
+	//è®¡ç®—ç­çº§å¹³å‡åˆ†ã€åŠæ ¼å’Œä¸åŠæ ¼ã€æˆç»©åœ¨å¹³å‡åˆ†ä¹‹ä¸Šçš„äººæ•°
 	float classave=0;
 	int pass = 0, failnum = 0, aboveave = 0;
 
@@ -56,7 +56,7 @@ int main()
 	{
 		classave += stu[i].ave;
 	}
-	classave = classave / stunum;	//¼ÆËã°à¼¶Æ½¾ù·Ö
+	classave = classave / stunum;	//è®¡ç®—ç­çº§å¹³å‡åˆ†
 
 	for (int i = 0; i < stunum; i++)
 	{
@@ -68,23 +68,23 @@ int main()
 		{
 			aboveave++;
 		}
-	}	//¼ÆËã²»¼°¸ñ×ÜÈËÊıºÍ³¬¹ıÆ½¾ù·ÖµÄ×ÜÈËÊı
+	}	//è®¡ç®—ä¸åŠæ ¼æ€»äººæ•°å’Œè¶…è¿‡å¹³å‡åˆ†çš„æ€»äººæ•°
 
-reStart://ÔÙ´ÎÊ¹ÓÃÏµÍ³µÄÈë¿Ú
+reStart://å†æ¬¡ä½¿ç”¨ç³»ç»Ÿçš„å…¥å£
 
-	//´òÓ¡¹¦ÄÜÁĞ±í²¢Ñ¡ÔñÒªÊ¹ÓÃµÄ¹¦ÄÜ
-	printf("\t  ***¹¦ÄÜÁĞ±í***\n");
-	printf("\t1 ´òÓ¡×Ü³É¼¨²»¼°¸ñµÄÑ§ÉúÑ§ºÅ²¢Í³¼ÆÈËÊı\n");
-	printf("\t2 Í³¼Æ³É¼¨ÔÚÈ«°àÆ½¾ù·ÖÖ®ÉÏµÄÑ§ÉúÊı²¢´òÓ¡Ãûµ¥\n");
-	printf("\t3 Í³¼Æ¸÷·ÖÊı¶ÎµÄÑ§ÉúÈËÊıºÍ°Ù·Ö±È \n"); 
-	printf("\t4 °´×Ü·Ö³É¼¨´Ó¸ßµ½µÍÅÅÃû\n");
-	printf("\t5 ´òÓ¡³öÃû´Î±í\n");
-	printf("\t6 ²éÕÒÑ§Éú³É¼¨ºÍÅÅÃû\n");
-	printf("\t  ÇëÊäÈëÒªÊ¹ÓÃµÄ¹¦ÄÜĞòºÅ£º");
+	//æ‰“å°åŠŸèƒ½åˆ—è¡¨å¹¶é€‰æ‹©è¦ä½¿ç”¨çš„åŠŸèƒ½
+	printf("\t  ***åŠŸèƒ½åˆ—è¡¨***\n");
+	printf("\t1 æ‰“å°æ€»æˆç»©ä¸åŠæ ¼çš„å­¦ç”Ÿå­¦å·å¹¶ç»Ÿè®¡äººæ•°\n");
+	printf("\t2 ç»Ÿè®¡æˆç»©åœ¨å…¨ç­å¹³å‡åˆ†ä¹‹ä¸Šçš„å­¦ç”Ÿæ•°å¹¶æ‰“å°åå•\n");
+	printf("\t3 ç»Ÿè®¡å„åˆ†æ•°æ®µçš„å­¦ç”Ÿäººæ•°å’Œç™¾åˆ†æ¯” \n"); 
+	printf("\t4 æŒ‰æ€»åˆ†æˆç»©ä»é«˜åˆ°ä½æ’å\n");
+	printf("\t5 æ‰“å°å‡ºåæ¬¡è¡¨\n");
+	printf("\t6 æŸ¥æ‰¾å­¦ç”Ÿæˆç»©å’Œæ’å\n");
+	printf("\t  è¯·è¾“å…¥è¦ä½¿ç”¨çš„åŠŸèƒ½åºå·ï¼š");
 	int f;
 	scanf_s("%d", &f);
 
-	//Ñ¡ÔñÒªÊ¹ÓÃµÄº¯Êı
+	//é€‰æ‹©è¦ä½¿ç”¨çš„å‡½æ•°
 	switch (f)
 	{
 	case 1:fun1(stu, stunum, failnum);
@@ -99,54 +99,54 @@ reStart://ÔÙ´ÎÊ¹ÓÃÏµÍ³µÄÈë¿Ú
 		break;
 	case 6:fun6(stu, stunum);
 		break;
-	default:printf("´íÎó£¡");
+	default:printf("é”™è¯¯ï¼");
 	}
 
-reScan://ÔÙ´ÎÑ¯ÎÊÊÇ·ñ½áÊø³ÌĞòµÄÈë¿Ú
+reScan://å†æ¬¡è¯¢é—®æ˜¯å¦ç»“æŸç¨‹åºçš„å…¥å£
 
-	//Ñ¯ÎÊÊÇ·ñ½áÊøÊ¹ÓÃ
-	printf("ÊÇ·ñÒª½áÊø³ÌĞò£¿\n½áÊøÇë°´0£¬¼ÌĞøÊ¹ÓÃÇë°´1\n");
+	//è¯¢é—®æ˜¯å¦ç»“æŸä½¿ç”¨
+	printf("æ˜¯å¦è¦ç»“æŸç¨‹åºï¼Ÿ\nç»“æŸè¯·æŒ‰0ï¼Œç»§ç»­ä½¿ç”¨è¯·æŒ‰1\n");
 	int x;
 	scanf_s("%d", &x);
 	if (x == 0) { goto end; }
 	else if (x == 1) { goto reStart; }
-	else { printf("´íÎó£¡"); goto reScan; }
+	else { printf("é”™è¯¯ï¼"); goto reScan; }
 
-end://³ÌĞò½áÊøµÄ³ö¿Ú
+end://ç¨‹åºç»“æŸçš„å‡ºå£
 
 	fclose(fp);
 	return 0;
 }
 
-//¹¦ÄÜ1£º´òÓ¡×Ü³É¼¨²»¼°¸ñµÄÑ§ÉúÑ§ºÅ²¢Í³¼ÆÈËÊıº¯Êı
+//åŠŸèƒ½1ï¼šæ‰“å°æ€»æˆç»©ä¸åŠæ ¼çš„å­¦ç”Ÿå­¦å·å¹¶ç»Ÿè®¡äººæ•°å‡½æ•°
 void fun1(student stu[100], int stunum, int failnum)
 {
-	printf("Ñ§ºÅÎª£º");
+	printf("å­¦å·ä¸ºï¼š");
 	for (int i = 0; i < stunum; i++)
 	{
 		if (stu[i].sum < 180)
 		{
-			printf("%dºÅ ", stu[i].num);
+			printf("%då· ", stu[i].num);
 		}
 	}
-	printf("\n×ÜÈËÊıÎª£º%d\n", failnum);
+	printf("\næ€»äººæ•°ä¸ºï¼š%d\n", failnum);
 }
 
-//¹¦ÄÜ2£ºÍ³¼Æ³É¼¨ÔÚÈ«°àÆ½¾ù·ÖÖ®ÉÏµÄÑ§ÉúÊı²¢´òÓ¡Ãûµ¥
+//åŠŸèƒ½2ï¼šç»Ÿè®¡æˆç»©åœ¨å…¨ç­å¹³å‡åˆ†ä¹‹ä¸Šçš„å­¦ç”Ÿæ•°å¹¶æ‰“å°åå•
 void fun2(student stu[100], int stunum, int aboveave , float classave)
 {
-	printf("³É¼¨ÔÚÆ½¾ù·ÖÖ®ÉÏµÄÓĞ£º");
+	printf("æˆç»©åœ¨å¹³å‡åˆ†ä¹‹ä¸Šçš„æœ‰ï¼š");
 	for (int i = 0; i < stunum; i++)
 	{
 		if (stu[i].ave > classave)
 		{
-			printf("%dºÅ ", stu[i].num);
+			printf("%då· ", stu[i].num);
 		}
 	}
-	printf("\n×ÜÈËÊıÎª£º%d\n", aboveave);
+	printf("\næ€»äººæ•°ä¸ºï¼š%d\n", aboveave);
 }
 
-//¹¦ÄÜ3£ºÍ³¼Æ¸÷·ÖÊı¶ÎÈËÊıºÍ°Ù·Ö±È²¢Êä³ö
+//åŠŸèƒ½3ï¼šç»Ÿè®¡å„åˆ†æ•°æ®µäººæ•°å’Œç™¾åˆ†æ¯”å¹¶è¾“å‡º
 void fun3(student stu[100], int n)
 {
 	int num50 = 0, num60 = 0, num70 = 0, num80 = 0, num90 = 0;
@@ -164,14 +164,14 @@ void fun3(student stu[100], int n)
 	per70 = (float)num70 / n;
 	per80 = (float)num80 / n;
 	per90 = (float)num90 / n;
-	printf("60ÒÔÏÂ£º%d °Ù·Ö±È£º%f\n", num50, per50);
-	printf("60~70£º%d °Ù·Ö±È£º%f\n", num60, per60);
-	printf("70~80£º%d °Ù·Ö±È£º%f\n", num70, per70);
-	printf("80~90£º%d °Ù·Ö±È£º%f\n", num80, per80);
-	printf("90ÒÔÉÏ£º%d °Ù·Ö±È£º%f\n", num90, per90);
+	printf("60ä»¥ä¸‹ï¼š%d ç™¾åˆ†æ¯”ï¼š%f\n", num50, per50);
+	printf("60~70ï¼š%d ç™¾åˆ†æ¯”ï¼š%f\n", num60, per60);
+	printf("70~80ï¼š%d ç™¾åˆ†æ¯”ï¼š%f\n", num70, per70);
+	printf("80~90ï¼š%d ç™¾åˆ†æ¯”ï¼š%f\n", num80, per80);
+	printf("90ä»¥ä¸Šï¼š%d ç™¾åˆ†æ¯”ï¼š%f\n", num90, per90);
 }
 
-//¹¦ÄÜ4£º°´×Ü·Ö³É¼¨´Ó¸ßµ½µÍÅÅÃû
+//åŠŸèƒ½4ï¼šæŒ‰æ€»åˆ†æˆç»©ä»é«˜åˆ°ä½æ’å
 void fun4(student stu[100], int n)
 {
 	student tool;
@@ -189,11 +189,11 @@ void fun4(student stu[100], int n)
 	}
 	for (int i = n - 1; i >= 0; i--)
 	{
-		printf("µÚ%dÃû£ºÑ§ºÅ£º%d,ÓïÎÄ£º%d£¬ÊıÑ§£º%d£¬Ó¢Óï£º%d£¬×Ü·Ö£º%d\n", n - i,stu[i].num, stu[i].ch, stu[i].ma, stu[i].eng, stu[i].sum);
+		printf("ç¬¬%dåï¼šå­¦å·ï¼š%d,è¯­æ–‡ï¼š%dï¼Œæ•°å­¦ï¼š%dï¼Œè‹±è¯­ï¼š%dï¼Œæ€»åˆ†ï¼š%d\n", n - i,stu[i].num, stu[i].ch, stu[i].ma, stu[i].eng, stu[i].sum);
 	}
 }
 
-//¹¦ÄÜ5£º´òÓ¡Ãû´Î±í
+//åŠŸèƒ½5ï¼šæ‰“å°åæ¬¡è¡¨
 void fun5(student stu[100], int n, FILE *fp)
 {
 	student tool;
@@ -209,14 +209,14 @@ void fun5(student stu[100], int n, FILE *fp)
 			}
 		}
 	}
-	fprintf(fp, "\nÃû´Î  Ñ§ºÅ  ÓïÎÄ  ÊıÑ§  Ó¢Óï  ×Ü·Ö\n");
+	fprintf(fp, "\nåæ¬¡  å­¦å·  è¯­æ–‡  æ•°å­¦  è‹±è¯­  æ€»åˆ†\n");
 	for (int i = n - 1; i >= 0; i--)
 	{
 		fprintf(fp, " %d    %d    %d    %d    %d    %d\n", n - i, stu[i].num, stu[i].ch, stu[i].ma, stu[i].eng, stu[i].sum);
 	}
 }
 
-//¹¦ÄÜ6£º²éÕÒÑ§Éú³É¼¨ºÍÅÅÃû
+//åŠŸèƒ½6ï¼šæŸ¥æ‰¾å­¦ç”Ÿæˆç»©å’Œæ’å
 void fun6(student stu[100],int n)
 {
 	student tool;
@@ -233,12 +233,12 @@ void fun6(student stu[100],int n)
 		}
 	}
 	int num, i = 0;
-	printf("ÇëÊäÈë¸ÃÉúÑ§ºÅ£º");
+	printf("è¯·è¾“å…¥è¯¥ç”Ÿå­¦å·ï¼š");
 	scanf_s("%d", &num);
 	while (stu[i].num != num&&i<n)
 	{
 		i++;
 	}
 	if(i<n)
-	printf("¸ÃÉúÅÅÃû£º%d,ÓïÎÄ£º%d,ÊıÑ§£º%d,Ó¢Óï£º%d,×Ü·Ö£º%d", n - i, stu[i].ch, stu[i].ma, stu[i].eng, stu[i].sum);
+	printf("è¯¥ç”Ÿæ’åï¼š%d,è¯­æ–‡ï¼š%d,æ•°å­¦ï¼š%d,è‹±è¯­ï¼š%d,æ€»åˆ†ï¼š%d", n - i, stu[i].ch, stu[i].ma, stu[i].eng, stu[i].sum);
 }
